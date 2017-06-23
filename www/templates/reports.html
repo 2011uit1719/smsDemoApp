@@ -1,0 +1,146 @@
+<ion-view view-title="Reports" align-title="left" style="background:antiquewhite;">
+    <ion-content>
+        
+        <div class="list card">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Select Class
+                </div>
+                <select ng-change="showStudentList(report.selectedClass)"  ng-model="report.selectedClass">
+                    <option selected value="">None</option>
+                    <option ng-repeat="class in classes" value="{{class.id}}">{{class.name}}</option>
+                </select>
+            </label>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Select Student
+                </div>
+                <select  ng-model="report.selectedStudent">
+                    <option selected value="">None</option>
+                    <option value="all">All</option>
+                    <option ng-repeat="student in students" value="{{student.student_id}}">{{student.name}}</option>
+                </select>
+            </label>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Sms Type
+                </div>
+                <select ng-model="report.smsType">
+                    <option selected value="">None</option>
+                    <option value="absent">Absent</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </label>
+            
+            <label class="item item-input item-select">
+                <div class="input-label">
+                Select Report Type
+                </div>
+                <select ng-model="report.type">
+                    <option selected value="">None</option>
+                    <option value="day">Day</option>
+                    <option value="week">Weekly</option>
+                    <option value="month">Monthly</option>
+                </select>
+            </label>
+
+            <label ng-if="report.type=='month'" class="item item-input item-select">
+                <div class="input-label">
+                    Select Month
+                </div>
+                <select  ng-model="report.selectedMonth">
+                    <option selected value="01">January</option>
+                    <option value="02">Feburary</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </label>
+
+            <label ng-if="report.type=='week'" class="item item-input">
+                <span class="input-label">Select Week Date</span>
+                <input ng-model="report.selectedDate" type="date" placeholder="Select Week Date">
+            </label>
+
+            <label ng-if="report.type=='day'" class="item item-input">
+                <span class="input-label">Select Date</span>
+                <input ng-model="report.selectedDate" type="date" placeholder="Select Date">
+            </label>
+
+
+            <button ng-click="showClassReports()" class="button button-full button-positive">Show Report</button>
+        </div>
+
+        <div class="card" ng-if="absents.total_absents">
+            <a class="item item-icon-left" href="#">
+                <i class="icon ion-person-stalker"></i>
+                Total Absents
+                <span class="badge badge-assertive">{{absents.total_absents}}</span>
+            </a>
+        </div>
+        
+        <div class="card" ng-if="absents.length == 0 || absents.total_absents ==0">
+            <a class="item item-icon-left" href="#">
+                No data found
+            </a>
+        </div>
+
+        <div class="list" ng-if="absents.length">
+                    <div class="row">
+                        <div class="col col-25">
+                            <h4>Roll No</h4>
+                        </div>
+                        <div class="col col-50">
+                            <h4>Student Name</h4>
+                        </div>
+
+                        <div class="col col-25">
+                            <h4 ng-if="report.smsType == 'absent'">Absent</h4>
+                            <h4 ng-if="report.smsType == 'custom'">Custom</h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="item" ng-repeat="std in absents" href="#">
+                        <div class="row">
+                            <div class="col col-25">
+                                {{std.rollNo}}
+                            </div>
+                            <div class="col col-50">
+                                <h2>{{std.name}}</h2>
+                            </div>
+
+                            <div class="col col-25">
+                                <span class="badge badge-assertive">{{std.total_sms_sent}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+    </ion-content>
+</ion-view>
+
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar style="background:cadetblue;">
+      <h1 class="title">Select Report details </h1>
+      <div class="button button-clear" ng-click="hideModal()"><span class="icon ion-close"></span></div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+
+            
+
+        </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

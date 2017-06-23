@@ -1,0 +1,29 @@
+<ion-view view-title="Login" align-title="left">
+    <ion-content style="background: url(img/login.jpg) center; background-size: cover;">
+        <div class="hero no-header flat">
+            <div class="content">
+                <h3 style="margin-top:150px;" class="schoolHeadingLogin">School App</h3>
+                <!--<h3 class="schoolHeadingLogin">Sheoganj</h3>-->
+            </div>
+        </div>
+        <div class="list">
+            <ion-md-input placeholder="Username" ng-model="user.username" highlight-color="balanced" type="text"></ion-md-input>
+            <ion-md-input placeholder="Password" ng-model="user.password" highlight-color="energized" type="password"></ion-md-input>
+        </div>
+        <div class="padding">
+            <button ng-click="do_login()" class="button button-full button-assertive ink">Login</button>
+        </div>
+        <div class="list">
+          <div class="item" ng-if="loginForm.error" style="color:#fff;">
+            {{loginForm.error}}
+          </div>
+        </div>
+<!--
+        <div class="button-bar social-login">
+            <button class="button button-small button-border icon-left ion-social-google button-assertive-900">Google+</button>
+            <button class="button button-small button-border icon-left ion-social-twitter button-calm-900">Twitter</button>
+            <button class="button button-small button-border icon-left ion-social-facebook button-positive-900">Facebook</button>
+        </div>
+-->
+    </ion-content>
+</ion-view>

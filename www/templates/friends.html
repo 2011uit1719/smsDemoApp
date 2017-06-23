@@ -1,0 +1,93 @@
+<ion-view view-title="Take Attendence">
+    <ion-content ng-class="{expanded:isExpanded}" style="background-color: #d6e3ef;">
+        <div class="content" >
+
+                <div class="list card" style="background-color:linen">
+                <div class="item item-body">
+                    <div class="row">
+                    <p class="col">
+                        Class:- {{classDetails.class_name}}
+                    </p>
+                    <p class="col">
+                        Date:- {{date}}
+                    </p>
+                    </div>
+                    <div class="row">
+                        <div class="col col-50">
+                            <p>Total Students : {{classDetails.totalStudents}}</p>
+                            </div>
+                        <div class="col col-50">
+                            <ion-checkbox ng-click="select_all(selectAll)"ng-model="selectAll">select all</ion-checkbox>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                    <button ng-click="fetch_latest_students()" class="button button-full button-positive">
+                        <!-- <ion-icon name="contacts"></ion-icon> -->
+                        <!-- <i class="icon ion-contacts"></i> -->
+                        Fetch student Details
+                    </button>
+                    </div>
+
+
+                </div>
+                </div>
+
+                <hr>
+                <div class="list">
+                    <div class="row">
+                        <div class="col col-25">
+                            <h4>Roll No</h4>
+                        </div>
+                        <div class="col col-50">
+                            <h4>Student Name</h4>
+                        </div>
+
+                        <div class="col col-25">
+                            <h4>Absent</h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="item" ng-repeat="std in classDetails.students" href="#">
+                        <div class="row">
+                            <div class="col col-25">
+                                {{std.rollNo}}
+                            </div>
+                            <div class="col col-50">
+                                <h2>{{std.name}}</h2>
+                            </div>
+
+                            <div class="col col-25">
+                                <span class="badge">
+                                <ion-checkbox ng-model="std.absent"></ion-checkbox>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <label class = "item item-input item-select item-light">
+                    <div class = "input-label">
+                        Message type
+                    </div>
+
+                    <select ng-model="sms.type">
+                        <option selected>Absent sms</option>
+                        <option>Custom sms</option>
+                    </select>
+
+                </label>
+                    <div ng-if="sms.type=='Custom sms'">
+                        <label class="item item-input text">
+                        <textarea placeholder="Enter Custom sms" rows="3" ng-model="customSMS.msg" ng-Required="true"></textarea>
+                        </label>
+                    </div>
+
+                <button ng-click="save()" class="button button-full button-positive">Save</button>
+            
+        </div>
+    </ion-content>
+</ion-view>
